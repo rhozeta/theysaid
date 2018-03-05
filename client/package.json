@@ -1,10 +1,12 @@
 {
+  "homepage": "https://github.com/rhozeta/theysaid",
   "name": "theysaid.co",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "rhozeta <nicholasmazzotta@gmail.com>",
   "private": true,
   "scripts": {
+    "deploy": "node /node_modules/vue-gh-pages/index.js",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
@@ -22,6 +24,7 @@
     "save": "^2.3.2",
     "vue": "^2.5.2",
     "vue-awesome": "^2.3.5",
+    "vue-gh-pages": "^1.10.2",
     "vue-particles": "^1.0.9",
     "vue-router": "^3.0.1"
   },
