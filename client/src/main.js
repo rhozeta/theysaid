@@ -3,8 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
-require('./assets/main.css')
+import 'vue-awesome/icons'
+import Icon from '../node_modules/vue-awesome/components/Icon'
+import 'bootstrap'
+import VueParticles from 'vue-particles'
+Vue.use(VueParticles)
+Vue.component('icon', Icon)
 
 Vue.config.productionTip = false
 
