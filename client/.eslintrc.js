@@ -27,6 +27,8 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+    // v-for key
+    'require-v-for-key': 'off',
     // allow async-await
     'generator-star-spacing': 'off',
     // allow debugger during development

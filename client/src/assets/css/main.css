@@ -1,5 +1,37 @@
 @import 'bulma/css/bulma.css';
 
+@import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
+@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+#post-body{
+  height: max-content;
+}
+.sidebar {
+  background-color: #2f4550;
+  height: 100vh;
+  border-right: black 5px solid;
+}
+.sidebar-post-container {
+  border-top: black 2px solid;
+  color: white;
+  padding: 5%;
+  margin: 5%;
+  overflow-wrap: normal;
+  margin: 0;
+}
+.sidebar-post-container > a {
+  color: white;
+}
+
 .hero {
   height: 100vh;
   width: 100vw;
