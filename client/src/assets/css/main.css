@@ -15,6 +15,11 @@ html, body {
 #post-body{
   height: max-content;
 }
+
+.selected {
+  background-color: white;
+  color: black;
+}
 .sidebar {
   background-color: #2f4550;
   height: 100vh;
@@ -22,53 +27,8 @@ html, body {
 }
 .sidebar-post-container {
   border-top: black 2px solid;
-  color: white;
-  padding: 5%;
-  margin: 5%;
+  margin: 5% 5%;
   overflow-wrap: normal;
   margin: 0;
-}
-.sidebar-post-container > a {
-  color: white;
-}
-
-.hero {
-  height: 100vh;
-  width: 100vw;
-  color: white;
-  background: #ad5389;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #3c1053, #ad5389);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #3c1053, #ad5389); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
-  margin: 0 auto;
-    
-  position: relative;
-
-}
-
-.cta-container {
- 
-  width: 25vw;
-  min-height: max-content;
-  height: auto;
-  
-  position: relative;
-
-}
-
-.cta-wrapper {
- 
-  width: 25vw;
-  height: 40vh;
-}
-
-.cta-wrapper > h1 {
-  
-  color: white;
-}
-
-
-#cta-inp {
-  margin-top: 5%;
-  margin-bottom: 5%;
+  height: 100%;
 }

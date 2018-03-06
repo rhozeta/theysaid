@@ -10,6 +10,7 @@ db.once('open', function(){
   console.log('Connection Succeeded')
 })
 
+exports.name = db
 const config = require('./config/config')
 
 const app = express()
