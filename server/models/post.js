@@ -6,12 +6,7 @@ var PostSchema = new Schema({
   body: String,
   likes: Number,
   tags: [String],
-  comments: {
-    comment: {
-      body: [String],
-      likes: Number
-    }
-  },
+  comments: [String],
   published: {
     type: Date,
     default: Date.now

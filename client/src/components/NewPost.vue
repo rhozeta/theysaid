@@ -24,14 +24,15 @@ export default {
     return {
       title: '',
       body: '',
-      tags: ''
+      tag: ''
     }
   },
   methods: {
     async addPost () {
       await PostsService.addPost({
         title: this.title,
-        body: this.body
+        body: this.body,
+        tag: this.tag
       })
       this.$router.push({ name: 'Main' })
     }

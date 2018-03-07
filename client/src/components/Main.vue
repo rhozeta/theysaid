@@ -16,7 +16,7 @@
         </div>
       </div>
       <!-- #### post display #### -->
-      <div class='col-md-10'>
+      <div class='col-md-10' id='post-dsiplay'>
         <div class="container">
           <div class="card">
             <div class="card-body post-container">
@@ -30,6 +30,10 @@
             <textarea class="form-control" name="newComment" id="newComment" cols="30" rows="3" v-model='commentBody'></textarea>
             <button class="form-control btn btn-success" @click='addComment(selectedPost._id)'>SUBMIT COMMENT</button>
           </div>
+        <!-- #### render comments #### -->
+        <div v-for="(comment, index) in selectedPost.comments" :key='index' class='comment-box'>
+          <span><p>{{ index }}{{ selectedPost.comments[index] }}</p></span>
+        </div>
         </div>
 
       </div>
@@ -69,9 +73,11 @@ export default {
     },
     async addComment (id) {
       console.log(id)
-      console.log(this.commentBody)
-      await PostsService.addComment(id)
+      await PostsService.addComment(id, this.commentBody)
       this.$router.push({ name: 'Main' })
+    },
+    showDiv () {
+      document.getElementById('post-display').style.display = 'block'
     }
   }
 }

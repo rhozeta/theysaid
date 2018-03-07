@@ -55,11 +55,13 @@ module.exports = (app) => {
   })
 
   app.put('/main/:id', function(req, res) {
-    console.log('HITTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT')
-    const id = req.body.id
-    req.newData.commentBody = req.body.commentBody
-    Post.findOneAndUpdate(id, newData, {upsert:true}, function(err){
-      if (err) return res.send(500, { error: err })
+    console.log('new comment route hit')
+    const id = req.params.id
+    const data = req.body.commentBody
+    console.log(data)
+    console.log(id)
+    Post.findOneAndUpdate({_id: id}, { $push: {'comments': data} }, function(err){
+      if (err) return res.status(500).send()
       return res.send('succesfully saved')
     })
   })

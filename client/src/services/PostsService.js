@@ -10,7 +10,8 @@ export default {
   addPost (params) {
     return Api().post('main/', params)
   },
-  addComment (id) {
-    return Api().put('main/' + id, id)
+  addComment (id, commentBody) {
+    console.log(commentBody)
+    return Api().put('main/' + id, { commentBody })
   }
 }
