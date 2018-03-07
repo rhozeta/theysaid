@@ -5,10 +5,12 @@ module.exports = {
     "extends": "eslint:recommended",
     "parserOptions": {
         "ecmaVersion": 6,
+        "sourceType": "module",
         "ecmaFeatures": {
-            "jsx": true
+            jsx: false
         }
     },
+    "parser": "babel-eslint",
     "rules": {
         "no-undef": "off",
         "no-console": "off",

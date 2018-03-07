@@ -6,7 +6,11 @@ var PostSchema = new Schema({
   body: String,
   tags: String,
   likes: Number,
-  comments: [String]
+  comments: [String],
+  published: {
+    type: Date,
+    default: Date.now
+  }
 })
 
 var Post = mongoose.model('Post', PostSchema)

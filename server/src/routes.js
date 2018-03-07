@@ -1,3 +1,4 @@
+
 const Post = require('../models/post')
 
 module.exports = (app) => {
@@ -6,26 +7,45 @@ module.exports = (app) => {
       message: 'hi ' + req.body.email + ', you have been registered'
     })
   })
-  
   app.get('/main', (req, res) => {
-    Post.find({}, 'title description', function (error, posts) {
-      if (error) { console.error(error) }
+    Post.find({}, 'title body _id', function (error, posts) {
+      if (error) {
+        console.error(error)
+      }
       res.send({
         posts: posts
       })
-    }).sort({_id:-1})
+    }).sort({
+      _id: -1
+    })
   })
-  app.post('/main', (req, res) => {
+  app.get('/main/:id', (req, res) => {
+    const id = req.params.id
+    console.log(id)
+    Post.findById(id, function(error, foundData) {
+      if (error) {
+        console.log(error)
+      } else {
+        res.send({
+          selectedPost: foundData
+        })
+      }
+    }
+    )})
+
+  app.post('/main', (req) => {
     //var db = req.db
     var title = req.body.title
     var body = req.body.body
-    var new_post = new Post ({
+    var new_post = new Post({
       title: title,
-      body: body
+      body: body,
+      id: _id
     })
   
+
     new_post.save(function (error) {
-      if(error) {
+      if (error) {
         console.log(error)
       }
       res.send({
@@ -34,6 +54,4 @@ module.exports = (app) => {
       })
     })
   })
-  
-
 }
