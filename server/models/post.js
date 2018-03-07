@@ -4,9 +4,14 @@ var Schema = mongoose.Schema
 var PostSchema = new Schema({
   title: String,
   body: String,
-  tags: String,
   likes: Number,
-  comments: [String],
+  tags: [String],
+  comments: {
+    comment: {
+      body: [String],
+      likes: Number
+    }
+  },
   published: {
     type: Date,
     default: Date.now

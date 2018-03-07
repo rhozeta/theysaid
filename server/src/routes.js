@@ -33,14 +33,13 @@ module.exports = (app) => {
     }
     )})
 
-  app.post('/main', (req) => {
+  app.post('/main', (req, res) => {
     //var db = req.db
     var title = req.body.title
     var body = req.body.body
     var new_post = new Post({
       title: title,
-      body: body,
-      id: _id
+      body: body
     })
   
 
@@ -52,6 +51,16 @@ module.exports = (app) => {
         success: true,
         message: 'Post submitted!'
       })
+    })
+  })
+
+  app.put('/main/:id', function(req, res) {
+    console.log('HITTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT')
+    const id = req.body.id
+    req.newData.commentBody = req.body.commentBody
+    Post.findOneAndUpdate(id, newData, {upsert:true}, function(err){
+      if (err) return res.send(500, { error: err })
+      return res.send('succesfully saved')
     })
   })
 }
