@@ -4,6 +4,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017/posts')
+mongoose.connect('mongodb://localhost:27017/users')
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error'))
 db.once('open', function(){

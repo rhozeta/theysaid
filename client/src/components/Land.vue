@@ -36,8 +36,8 @@
         <div>
           <p>FIND YOUR FORUM</p>
           <p id="tagline">See what the women in your field have to say.</p>
-          <span id="cta-signup" contenteditable="true" class="form-control" type="email" placeholder="Enter your email address.">Enter your email address.</span>
-          <button type="button" class="button-color btn btn-primary btn-lg">SIGN UP</button>
+          <input id="cta-signup" contenteditable="true" class="form-control" type="email" placeholder="Enter your email address." v-model='email'>
+          <button class="button-color btn btn-primary btn-lg" @click='emailCheck'>SIGN UP</button>
         </div>
 
       </div>
@@ -115,7 +115,7 @@
     </div>
      <label for="comment">Comment:</label>
   <textarea class="form-control" rows="5" id="comment"></textarea>
-    <button action="" class="btn btn-secondary btn-lg">SEND</button>
+    <button class="btn btn-secondary btn-lg">SEND</button>
     </div>
   </div>
 
@@ -136,9 +136,20 @@
 </template>
 
 <script>
-
+import AuthenticationService from '../services/AuthenticationService.js'
 export default {
-  name: 'land'
+  name: 'land',
+  data () {
+    return {
+      email: ''
+    }
+  },
+  methods: {
+    async emailCheck () {
+      const email = this.email
+      await AuthenticationService.emailCheck(email)
+    }
+  }
 }
 
 </script>

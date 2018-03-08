@@ -1,12 +1,47 @@
 
 const Post = require('../models/post')
+const User = require('../models/user')
 
 module.exports = (app) => {
-  app.post('/register', (req, res) => {
-    res.send({
-      message: 'hi ' + req.body.email + ', you have been registered'
+  app.post('/login', (req) => {
+    const email = req.body.email
+    const password = req.body.password
+    console.log(password)
+    User.find({email: email}, function(err, user) {
+      console.log(user.password)
+      if (err) {
+        console.log(err)
+      } else {
+        if (password == user.password) {
+          console.log('match')
+        } else {
+          console.log('user not found')
+        }
+      }
     })
   })
+
+  app.post('/register', (req, res) => {
+    const email = req.body.email
+    const password = req.body.password
+    console.log(email)
+    console.log(password)
+    var new_user = new User ({
+      email: email,
+      password: password
+    })
+    new_user.save(function (error) {
+      if (error) {
+        console.log(error)
+      }
+      res.send({
+        success: true,
+        message: 'User created!'
+      })
+      console.log('user created')
+    })
+  })
+
   app.get('/main', (req, res) => {
     Post.find({}, function (error, posts) {
       if (error) {
@@ -19,6 +54,7 @@ module.exports = (app) => {
       _id: -1
     })
   })
+
   app.get('/main/:id', (req, res) => {
     const id = req.params.id
     console.log(id)
@@ -41,8 +77,6 @@ module.exports = (app) => {
       title: title,
       body: body
     })
-  
-
     new_post.save(function (error) {
       if (error) {
         console.log(error)
@@ -75,4 +109,5 @@ module.exports = (app) => {
       })
     }
   })
+
 }

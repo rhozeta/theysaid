@@ -50,7 +50,6 @@
 
 <script>
 import PostsService from '../services/PostsService.js'
-
 export default {
   name: 'posts',
   data () {
@@ -97,10 +96,8 @@ export default {
     }
   }
 }
-
 </script>
 
 <style>
   @import '../assets/css/main.css';
-
 </style>

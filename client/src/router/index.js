@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
 import Land from '@/components/Land'
-import NewPost from '@/components/NewPost'
 
 Vue.use(Router)
 
@@ -21,7 +20,17 @@ export default new Router({
     {
       path: '/main/new',
       name: 'NewPost',
-      component: NewPost
+      component: require('@/components/NewPost.vue').default
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: require('@/components/Login.vue').default
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: require('@/components/Signup.vue').default
     }
   ]
 })
