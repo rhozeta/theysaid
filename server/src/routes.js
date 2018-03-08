@@ -8,7 +8,7 @@ module.exports = (app) => {
     })
   })
   app.get('/main', (req, res) => {
-    Post.find({}, 'title body _id', function (error, posts) {
+    Post.find({}, function (error, posts) {
       if (error) {
         console.error(error)
       }
@@ -58,11 +58,21 @@ module.exports = (app) => {
     console.log('new comment route hit')
     const id = req.params.id
     const data = req.body.commentBody
+    const choice = req.body.choice
+    console.log(choice)
     console.log(data)
     console.log(id)
-    Post.findOneAndUpdate({_id: id}, { $push: {'comments': data} }, function(err){
-      if (err) return res.status(500).send()
-      return res.send('succesfully saved')
-    })
+    if (data) {
+      Post.findOneAndUpdate({_id: id}, { $push: {'comments': data} }, function(err){
+        if (err) return res.status(500).send()
+        return res.send('succesfully saved')
+      })
+    } else {
+      console.log(choice)
+      Post.findOneAndUpdate({_id: id}, { $inc: {'likes': choice} }, function(err){
+        if (err) return res.status(500).send()
+        return res.send('succesfully like/disliked')
+      })
+    }
   })
 }

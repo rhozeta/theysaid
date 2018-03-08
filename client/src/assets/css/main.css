@@ -10,7 +10,9 @@ html, body {
   margin: 0;
   padding: 0;
 }
-
+.post-container {
+  display: none;
+}
 #post-body{
   height: max-content;
 }

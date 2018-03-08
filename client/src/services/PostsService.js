@@ -13,5 +13,13 @@ export default {
   addComment (id, commentBody) {
     console.log(commentBody)
     return Api().put('main/' + id, { commentBody })
+  },
+  likePost (id, choice) {
+    if (choice === 1) {
+      console.log('liked')
+    } else {
+      console.log('disliked')
+    }
+    return Api().put('main/' + id, { choice })
   }
 }

@@ -16,16 +16,20 @@
         </div>
       </div>
       <!-- #### post display #### -->
-      <div class='col-md-10' id='post-dsiplay'>
+      <div class='col-md-10'>
         <div class="container">
           <div class="card">
             <div class="card-body post-container">
+              <span @click='likePost(selectedPost._id, true)'>
+              <icon name='arrow-up' scale='2'></icon>
+              </span>
+              <span @click='likePost(selectedPost._id, false)'>
+              <icon name='arrow-down' scale='2'></icon>
+              </span>
+                <span v-text=selectedPost.likes></span>
               <h1>{{ selectedPost.title }}</h1>
               <p>{{ selectedPost.body }}</p>
-          </div>
-        </div>
-      <!-- #### comments #### -->
-        <div class="card comment-display">
+              <div class="card comment-display">
           <div class="card new-comment form-group">
             <textarea class="form-control" name="newComment" id="newComment" cols="30" rows="3" v-model='commentBody'></textarea>
             <button class="form-control btn btn-success" @click='addComment(selectedPost._id)'>SUBMIT COMMENT</button>
@@ -35,7 +39,8 @@
           <span><p>{{ index }}{{ selectedPost.comments[index] }}</p></span>
         </div>
         </div>
-
+          </div>
+        </div>
       </div>
     </div>
 
@@ -53,6 +58,7 @@ export default {
       posts: [],
       selectedPost: [],
       post: [],
+      likes: '',
       commentBody: ''
     }
   },
@@ -63,8 +69,11 @@ export default {
     async getPosts () {
       const response = await PostsService.fetchPosts()
       this.posts = response.data.posts
+      this.likes = this.selectedPost.likes
+      console.log(this.likes)
     },
     async showPost (id) {
+      $('.post-container').css({'display': 'block'})
       const response = await PostsService.selectPost(id)
       this.selectedPost = response.data.selectedPost
       var thisPost = '#' + id
@@ -76,8 +85,15 @@ export default {
       await PostsService.addComment(id, this.commentBody)
       this.$router.push({ name: 'Main' })
     },
-    showDiv () {
-      document.getElementById('post-display').style.display = 'block'
+    async likePost (id, choice) {
+      console.log(id)
+      if (choice === true) {
+        ++this.selectedPost.likes
+        await PostsService.likePost(id, 1)
+      } else {
+        --this.selectedPost.likes
+        await PostsService.likePost(id, -1)
+      }
     }
   }
 }
