@@ -1,0 +1,11 @@
+@import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
+
+.navbar {
+  background-color: #000000;
+  position: fixed;
+  height: 5vh;
+  
+}
+.nav-link {
+  color: white;
+}

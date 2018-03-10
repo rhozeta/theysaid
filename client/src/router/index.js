@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
 import Land from '@/components/Land'
-
+import Profile from '@/components/Profile'
 Vue.use(Router)
 
 export default new Router({
@@ -31,6 +31,11 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: require('@/components/Signup.vue').default
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: Profile
     }
   ]
 })

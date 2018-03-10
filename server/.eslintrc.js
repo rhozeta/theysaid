@@ -12,6 +12,7 @@ module.exports = {
     },
     "parser": "babel-eslint",
     "rules": {
+        "no-unused-vars": "off",
         "no-undef": "off",
         "no-console": "off",
         "indent": [

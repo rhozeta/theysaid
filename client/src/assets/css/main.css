@@ -1,6 +1,9 @@
 
 @import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 @import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+::-webkit-scrollbar { 
+  display: none; 
+}
 
 * {
   box-sizing: border-box;
@@ -18,18 +21,21 @@ html, body {
 }
 
 .selected {
-  background-color: white;
-  color: black;
+  color: #b8dbd9;
+  background-color: aquamarine;
 }
 .sidebar {
-  background-color: #2f4550;
-  height: 100vh;
-  border-right: black 5px solid;
+  background-color: grey;
+  color: white;
+  height: 95vh;
+  overflow-y: scroll;
 }
 .sidebar-post-container {
-  border-top: black 2px solid;
-  margin: 5% 5%;
   overflow-wrap: normal;
-  margin: 0;
-  height: 100%;
+  height: max-content;
+  width: 100%;
+  margin: 2% 0;
+  padding: 10%;
+  color: black;
 }
+

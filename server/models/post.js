@@ -6,12 +6,8 @@ var PostSchema = new Schema({
   body: String,
   likes: Number,
   tags: [String],
-  comments: [String],
-  published: {
-    type: Date,
-    default: Date.now
-  }
-})
+  comments: [String]
+  })
 
 var Post = mongoose.model('Post', PostSchema)
 module.exports = Post

@@ -1,10 +1,10 @@
 import Api from '@/services/Api'
 
 export default {
-  emailCheck (email, password) {
-    return Api().post('/register', { email, password })
+  registerUser (credentials) {
+    return Api().post('/register', credentials)
   },
-  loginUser (email, password) {
-    return Api().post('/login', {email, password})
+  loginUser (credentials) {
+    return Api().post('/login', credentials)
   }
 }

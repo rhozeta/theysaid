@@ -1,8 +1,8 @@
 
 <template>
   <div class="posts">
-    <h1>Add Post</h1>
-      <div class="form-group">
+      <div class="form-group container">
+        <h1>Add Post</h1>
         <div>
           <input class="form-control" type="text" name="title" placeholder="TITLE" v-model="title">
         </div>
@@ -41,4 +41,5 @@ export default {
 </script>
 
 <style>
+  @import '../assets/css/main.css'
 </style>

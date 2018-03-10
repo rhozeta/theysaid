@@ -1,46 +1,14 @@
 
 const Post = require('../models/post')
 const User = require('../models/user')
-
+const passport = require('passport')
+const AuthenticationController = require('./controllers/AuthenticationController')
+const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 module.exports = (app) => {
-  app.post('/login', (req) => {
-    const email = req.body.email
-    const password = req.body.password
-    console.log(password)
-    User.find({email: email}, function(err, user) {
-      console.log(user.password)
-      if (err) {
-        console.log(err)
-      } else {
-        if (password == user.password) {
-          console.log('match')
-        } else {
-          console.log('user not found')
-        }
-      }
-    })
-  })
 
-  app.post('/register', (req, res) => {
-    const email = req.body.email
-    const password = req.body.password
-    console.log(email)
-    console.log(password)
-    var new_user = new User ({
-      email: email,
-      password: password
-    })
-    new_user.save(function (error) {
-      if (error) {
-        console.log(error)
-      }
-      res.send({
-        success: true,
-        message: 'User created!'
-      })
-      console.log('user created')
-    })
-  })
+  app.post('/login', AuthenticationController.login)
+
+  app.post('/register', AuthenticationControllerPolicy.register, AuthenticationController.register)
 
   app.get('/main', (req, res) => {
     Post.find({}, function (error, posts) {
@@ -50,8 +18,6 @@ module.exports = (app) => {
       res.send({
         posts: posts
       })
-    }).sort({
-      _id: -1
     })
   })
 
@@ -81,6 +47,7 @@ module.exports = (app) => {
       if (error) {
         console.log(error)
       }
+      console.log('post submitted')
       res.send({
         success: true,
         message: 'Post submitted!'
@@ -93,21 +60,17 @@ module.exports = (app) => {
     const id = req.params.id
     const data = req.body.commentBody
     const choice = req.body.choice
-    console.log(choice)
     console.log(data)
     console.log(id)
-    if (data) {
-      Post.findOneAndUpdate({_id: id}, { $push: {'comments': data} }, function(err){
-        if (err) return res.status(500).send()
-        return res.send('succesfully saved')
-      })
-    } else {
-      console.log(choice)
-      Post.findOneAndUpdate({_id: id}, { $inc: {'likes': choice} }, function(err){
-        if (err) return res.status(500).send()
-        return res.send('succesfully like/disliked')
-      })
-    }
+    Post.findOneAndUpdate({_id: id}, { $push: {'comments': data} }, function(err){
+      if (err) return res.status(500).send()
+      return res.send('succesfully saved')
+    })
+    console.log(choice)
+    Post.findOneAndUpdate({_id: id}, { $inc: {'likes': choice} }, function(err){
+      if (err) return res.status(500).send()
+      return res.send('succesfully like/disliked')
+    })
   })
 
 }

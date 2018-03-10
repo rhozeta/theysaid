@@ -3,15 +3,12 @@
     <div class='row'>
       <!-- #### sidebar #### -->
       <div class='col-md-2 sidebar'>
-        <h1>sidebar</h1>
+        <h3>female/finance/nyc</h3>
         <div v-for="post in posts" :key='post._id'>
-          <div :id='post._id' class="sidebar-post-container" @click='showPost(post._id)'>
-            <a>
-              <span>
-                <b> {{ post.title }}</b>
-              </span>
-              <br/>
-            </a>
+          <div :id='post._id' class="sidebar-post-container card" @click='showPost(post._id)'>
+                <b>{{ post.title }}</b>
+                <p v-if='post.likes'>{{  post.likes }} likes</p>
+                <p>{{  post.published | moment('LTS ddd, MMMM Do YYYY') }}</p>
           </div>
         </div>
       </div>
@@ -31,12 +28,12 @@
               <p>{{ selectedPost.body }}</p>
               <div class="card comment-display">
           <div class="card new-comment form-group">
-            <textarea class="form-control" name="newComment" id="newComment" cols="30" rows="3" v-model='commentBody'></textarea>
+               <textarea class="form-control" rows="5" cols="15" placeholder="Comment" v-model="commentBody"></textarea>
             <button class="form-control btn btn-success" @click='addComment(selectedPost._id)'>SUBMIT COMMENT</button>
           </div>
         <!-- #### render comments #### -->
         <div v-for="(comment, index) in selectedPost.comments" :key='index' class='comment-box'>
-          <span><p>{{ index }}{{ selectedPost.comments[index] }}</p></span>
+          <div class='card'><p>{{ index }}{{ selectedPost.comments[index] }}</p></div>
         </div>
         </div>
           </div>
@@ -69,6 +66,7 @@ export default {
       const response = await PostsService.fetchPosts()
       this.posts = response.data.posts
       this.likes = this.selectedPost.likes
+      console.log(this.date)
       console.log(this.likes)
     },
     async showPost (id) {

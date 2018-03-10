@@ -10,12 +10,13 @@
         </div>
         <div>
         <h4>Password</h4>
-        <input type='text' name='email' class='form-control' v-model='password'>
+        <input type='password' name='password' class='form-control' v-model='password'>
         </div>
         <div>
         <h4>Password (again)</h4>
-        <input type='text' name='emailTest' class='form-control' v-model='password2'>
+        <input type='password' name='password2' class='form-control' v-model='password2'>
         </div>
+        <div class='error' v-html='error' />
         <button class='btn btn-success btn-lg' @click='addUser'>Sign Up</button>
       </div>
     </div>
@@ -30,7 +31,8 @@ export default {
     return {
       email: '',
       password: '',
-      password2: ''
+      password2: '',
+      error: null
     }
   },
   mounted () {
@@ -38,15 +40,18 @@ export default {
   },
   methods: {
     async addUser () {
-      if (this.password2.length !== 0) {
-        if (this.password !== this.password2) {
-          alert('your passwords do not match!')
-        } else {
-          const email = this.email
-          const password = this.password
-          alert('welcome to female/finance/nyc')
-          await AuthenticationService.emailCheck(email, password)
-        }
+      try {
+        const response = await AuthenticationService.registerUser({
+          email: this.email,
+          password: this.password
+        })
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
+        this.$router.push({
+          name: 'Main'
+        })
+      } catch (error) {
+        this.error = error.response.data.error
       }
     }
   }
@@ -55,4 +60,7 @@ export default {
 
 <style>
 @import '../assets/css/main.css';
+.error {
+  color: red;
+}
 </style>
