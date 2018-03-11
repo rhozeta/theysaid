@@ -7,7 +7,7 @@
         <div v-for="post in posts" :key='post._id'>
           <div :id='post._id' class="sidebar-post-container card" @click='showPost(post._id)'>
                 <b>{{ post.title }}</b>
-                <p v-if='post.likes'>{{  post.likes }} likes</p>
+                <p v-if="post.likes">{{  post.likes.likedBy.length }} likes</p>
                 <p>{{  post.published | moment('LTS ddd, MMMM Do YYYY') }}</p>
           </div>
         </div>
@@ -23,7 +23,7 @@
               <span @click='likePost(selectedPost._id, false)'>
               <icon name='arrow-down' scale='2'></icon>
               </span>
-                <span v-text=selectedPost.likes></span>
+                <span v-if="selectedPost.likes">{{ selectedPost.likes.likedBy.length }}</span>
               <h1>{{ selectedPost.title }}</h1>
               <p>{{ selectedPost.body }}</p>
               <div class="card comment-display">
@@ -54,7 +54,8 @@ export default {
       posts: [],
       selectedPost: [],
       post: [],
-      likes: '',
+      like: '',
+      likes: [],
       commentBody: ''
     }
   },
@@ -83,13 +84,14 @@ export default {
       this.$router.push({ name: 'Main' })
     },
     async likePost (id, choice) {
+      const userId = this.$store.state.user._id
       console.log(id)
       if (choice === true) {
-        ++this.selectedPost.likes
-        await PostsService.likePost(id, 1)
+        ++this.selectedPost.likes.amount
+        await PostsService.likePost(id, 1, userId)
       } else {
-        --this.selectedPost.likes
-        await PostsService.likePost(id, -1)
+        --this.selectedPost.likes.amount
+        await PostsService.likePost(id, -1, userId)
       }
     }
   }

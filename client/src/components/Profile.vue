@@ -30,7 +30,7 @@
 
 <script>
 import {mapState} from 'vuex'
-import PostsService from '@/services/PostsService'
+// import PostsService from '@/services/PostsService'
 export default {
   computed: {
     ...mapState([
@@ -40,9 +40,6 @@ export default {
   },
   async mounted () {
     if (this.isUserLoggedIn) {
-      this.likes = (await PostsService.index({
-        userId: this.user.id
-      }))
     }
   }
 }

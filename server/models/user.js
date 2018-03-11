@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
+const Post = require('./post')
 var Schema = mongoose.Schema
 var SALT_WORK_FACTOR = 10
 

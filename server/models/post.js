@@ -4,9 +4,16 @@ var Schema = mongoose.Schema
 var PostSchema = new Schema({
   title: String,
   body: String,
-  likes: Number,
+  likes: {
+    amount: Number,
+    likedBy: [String]
+  },
   tags: [String],
-  comments: [String]
+  comments: [String],
+  published: {
+    type: Date,
+    default: Date.now()
+  }
   })
 
 var Post = mongoose.model('Post', PostSchema)

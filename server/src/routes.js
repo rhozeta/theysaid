@@ -59,18 +59,38 @@ module.exports = (app) => {
     console.log('new comment route hit')
     const id = req.params.id
     const data = req.body.commentBody
+    const userId = req.body.userId
     const choice = req.body.choice
+    console.log(userId)
     console.log(data)
-    console.log(id)
-    Post.findOneAndUpdate({_id: id}, { $push: {'comments': data} }, function(err){
-      if (err) return res.status(500).send()
-      return res.send('succesfully saved')
-    })
-    console.log(choice)
-    Post.findOneAndUpdate({_id: id}, { $inc: {'likes': choice} }, function(err){
-      if (err) return res.status(500).send()
-      return res.send('succesfully like/disliked')
-    })
-  })
-
+    if (data) {
+      Post.findOneAndUpdate({_id: id}, { $push: {'comments': data} }, function(err){
+        if (err) return res.status(500).send()
+        return res.send('succesfully saved')
+      })
+    } else {
+      console.log(choice, userId)
+      Post.findOneAndUpdate({_id: id}, { $inc: {'likes.$.amount': choice }, function(err){
+        if (err) return res.status(500).send({
+          message: 'could not add to like count'
+        })
+        return res.send('succesfully like/disliked')
+      }})
+      const likeCheck = Post.find({'liked.likedBy': userId})
+      const dislikeCheck = Post.find({'liked.dislikedBy': userId})
+      console.log(likeCheck, dislikeCheck)
+      if (choice === 1) {
+        Post.findOneAndUpdate({_id: id}, { $push: {'likes.likedBy': userId } }, function(err){
+          if (err) return res.status(500).send({
+            message: 'could not add post to saved'
+          })
+          Post.update(
+            { _id: id },
+            { $pull: { 'likes': { 'dislikedBy': userId } } }
+          )
+          return res.send('succesfully added to likes')
+        })
+      }
+    }})
+  
 }
