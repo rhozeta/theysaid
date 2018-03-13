@@ -2,17 +2,21 @@
 <div>
   <!-- jumbotron -->
   <div id="landing">
-    <vue-particles color="#000000" id="particles-js"></vue-particles>
-    <div id="cta">
+    <vue-particles color="#000000" id="particles-js">
+    </vue-particles>
+     <div id="cta">
       <h1>theysaid</h1>
       <div>
         <p>FIND YOUR FORUM</p>
         <p id="tagline">See what the women in your field have to say.</p>
-        <input id="cta-signup" contenteditable="true" class="form-control" type="email" placeholder="Enter your email address." v-model='email'>
-        <button class="button-color btn btn-primary btn-lg" @click='emailCheck'>SIGN UP</button>
+        <router-link to='/register'>
+        <button class="button-color btn btn-primary btn-lg">SIGN UP</button>
+        </router-link>
+        <router-link to='/login'>
+        <button class="button-color btn btn-primary btn-lg">LOGIN</button>
+        </router-link>
       </div>
-
-    </div>
+</div>
   </div>
   <!-- services -->
   <div id="about">

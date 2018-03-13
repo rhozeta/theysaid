@@ -5,6 +5,7 @@
         <div class='card-body'>
           <h1>Sign Up</h1>
           <p>female/finance/nyc</p>
+          <p><i>Please note that to register you must use your work email address (@baml.com, @fanniemae.com etc.).<br>If your organization is not yet accepted, please fill out the contact form on the main page and request access.</i></p>
           <div class='form-group'>
             <div>
               <h4>Email</h4>

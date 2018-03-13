@@ -41,6 +41,11 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <router-link to='main/new'>
+              <a v-if='$store.state.isUserLoggedIn' class="nav-link" href=''>New Post</a>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <a v-if='$store.state.isUserLoggedIn' class="nav-link" href='' @click='logout'>Logout</a>
           </li>
         </ul>
