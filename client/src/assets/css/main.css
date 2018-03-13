@@ -58,7 +58,9 @@ color: red;
 color: black;
 }
 
-
+.sidebar-timestamp {
+  font-size: .7em;
+}
 html, body {
 margin: 0;
 padding: 0;

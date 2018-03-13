@@ -8,7 +8,7 @@ module.exports = (app) => {
   app.post('/login', AuthenticationController.login)
   app.post('/register', AuthenticationControllerPolicy.register, AuthenticationController.register)
 
-  app.get('/main', passport.authenticate('jwt',{ session: false }), (req, res) => {
+  app.get('/main', (req, res) => {
     Post.find({}, function (error, posts) {
       if (error) {
         console.error(error)

@@ -10,7 +10,7 @@
           <div :id='post._id' class="sidebar-post-container card" @click='showPost(post._id)'>
             <b>{{ post.title }}</b>
             <p v-if="post.likes">{{ post.likes.length }} likes</p>
-            <p>{{ post.published | moment('LTS ddd, MMMM Do YYYY') }}</p>
+            <p class='sidebar-timestamp'>{{ post.published | moment('LTS ddd, MMMM Do YYYY') }}</p>
           </div>
         </div>
       </div>
@@ -22,7 +22,9 @@
               <span @click='likePost(selectedPost._id)'>
                 <icon :id="'heart' + selectedPost._id" name='heart' class="heart" scale='2'></icon>
               </span>
+              <div>
               <span class='heart' v-if="selectedPost.likes">{{ selectedPost.likes.length }} likes </span>
+              </div>
               <h1>{{ selectedPost.title }}</h1>
               <p>{{ selectedPost.body }}</p>
               <div class="comment-display">

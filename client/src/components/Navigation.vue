@@ -21,7 +21,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to='login'>
+            <router-link to='/login'>
               <a v-if='!$store.state.isUserLoggedIn' class="nav-link" href="">Login</a>
             </router-link>
           </li>
@@ -60,7 +60,7 @@ export default {
       this.$store.dispatch('setToken', null)
       this.$store.dispatch('setUser', null)
       this.$router.push({
-        name: 'root'
+        name: 'Land'
       })
     }
   }
