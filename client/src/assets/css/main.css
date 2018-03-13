@@ -1,41 +1,116 @@
 
 @import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 @import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
-::-webkit-scrollbar { 
-  display: none; 
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+* {
+overflow-y: scroll;
+}
+.sidebar {
+height: 91.5vh;
+}
+.post-container {
+height: 81.5vh;
+}
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+* {
+overflow-y: scroll;
+}
+.sidebar {
+height: 91.5vh;
+}
+.post-container {
+height: 81.5vh;
+}
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+* {
+overflow-y: hidden;
+}
+.sidebar {
+height: 95vh;
+}
+.to-top {
+display: none;
+}
+.post-container {
+height: 86vh;
+}
+}
+
+
+::-webkit-scrollbar {
+display: none;
 }
 
 * {
-  box-sizing: border-box;
+box-sizing: border-box;
 }
+.liked {
+color: red;
+}
+.not-liked {
+color: black;
+}
+
 
 html, body {
-  margin: 0;
-  padding: 0;
+margin: 0;
+padding: 0;
+}
+.to-top {
+color: white;
+text-align: center;
+display: none;
+}
+.heart {
+float: right;
+margin: 5px;
+}
+.comment-time {
+float: right;
+}
+.post-content {
+margin-bottom: 4.5vh;
 }
 .post-container {
-  display: none;
+display: none;
+margin-top: 4.5vh;
+overflow-y: scroll;
 }
-#post-body{
-  height: max-content;
+.comment {
+margin: .5%;
 }
 
+#post-body{
+height: max-content;
+}
+.post-display {
+background-color: #2f4550;
+}
 .selected {
-  color: #b8dbd9;
-  background-color: aquamarine;
+color: #b8dbd9;
+background-color: #b8dbd9;
+}
+.sidebar-container {
+background-color: #2f4550;
 }
 .sidebar {
-  background-color: grey;
-  color: white;
-  height: 95vh;
-  overflow-y: scroll;
+color: white;
+overflow-y: scroll;
 }
 .sidebar-post-container {
-  overflow-wrap: normal;
-  height: max-content;
-  width: 100%;
-  margin: 2% 0;
-  padding: 10%;
-  color: black;
+overflow-wrap: normal;
+height: max-content;
+width: 100%;
+margin: 2% 0;
+padding: 10%;
+color: black;
 }
+
 

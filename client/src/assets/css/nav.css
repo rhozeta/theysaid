@@ -1,11 +1,36 @@
+
 @import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 
+@media only screen and (max-width: 600px) {
 .navbar {
-  background-color: #000000;
-  position: fixed;
-  height: 5vh;
-  
+height: max-content;
+}
+}
+
+@media only screen and (min-width: 600px) {
+.navbar {
+height: max-content;
+}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+.navbar {
+height: 5vh;
+}
+}
+
+.navbar {
+background-color: #000000;
+position: fixed;
 }
 .nav-link {
-  color: white;
+color: white;
 }
+.navbar-brand{
+color: #b8dbd9;
+}
+.navbar-toggler-icon {
+color: white;
+}
+

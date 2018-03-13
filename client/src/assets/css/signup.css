@@ -1,3 +1,43 @@
+
 @import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 @import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
-@import '../../../node_modules/bootstrap-social/bootstrap-social.css';
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+#wrapper{
+height: 92.5vh;
+}
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+#wrapper {
+height: 92.5vh;
+}
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+#wrapper {
+height: 95vh;
+}
+}
+
+#wrapper {
+background-color: #2f4550;
+width: 100vw;
+position: relative;
+}
+.hide {
+display: none;
+}
+.panel {
+height: max-content;
+width: max-content;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+-webkit-transform: translate(-50%, -50%);
+-moz-transform: translate(-50%, -50%);
+}
+
+

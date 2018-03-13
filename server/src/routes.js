@@ -1,4 +1,3 @@
-
 const Post = require('../models/post')
 const User = require('../models/user')
 const passport = require('passport')
@@ -7,10 +6,9 @@ const AuthenticationControllerPolicy = require('./policies/AuthenticationControl
 module.exports = (app) => {
 
   app.post('/login', AuthenticationController.login)
-
   app.post('/register', AuthenticationControllerPolicy.register, AuthenticationController.register)
 
-  app.get('/main', (req, res) => {
+  app.get('/main', passport.authenticate('jwt',{ session: false }), (req, res) => {
     Post.find({}, function (error, posts) {
       if (error) {
         console.error(error)
@@ -24,7 +22,7 @@ module.exports = (app) => {
   app.get('/main/:id', (req, res) => {
     const id = req.params.id
     console.log(id)
-    Post.findById(id, function(error, foundData) {
+    Post.findById(id, function (error, foundData) {
       if (error) {
         console.log(error)
       } else {
@@ -32,16 +30,18 @@ module.exports = (app) => {
           selectedPost: foundData
         })
       }
-    }
-    )})
+    })
+  })
 
   app.post('/main', (req, res) => {
     //var db = req.db
     var title = req.body.title
     var body = req.body.body
+    var tags = req.body.tag
     var new_post = new Post({
       title: title,
-      body: body
+      body: body,
+      tags: tags
     })
     new_post.save(function (error) {
       if (error) {
@@ -55,42 +55,74 @@ module.exports = (app) => {
     })
   })
 
-  app.put('/main/:id', function(req, res) {
+  app.put('/main/:id', function (req, res) {
     console.log('new comment route hit')
     const id = req.params.id
     const data = req.body.commentBody
     const userId = req.body.userId
-    const choice = req.body.choice
     console.log(userId)
     console.log(data)
     if (data) {
-      Post.findOneAndUpdate({_id: id}, { $push: {'comments': data} }, function(err){
+      Post.findOneAndUpdate({
+        _id: id
+      }, {
+        $push: {
+          'comments': data
+        }
+      }, function (err) {
         if (err) return res.status(500).send()
-        return res.send('succesfully saved')
+        return res.send({
+          message: 'Comment submitted!'
+        })
       })
     } else {
-      console.log(choice, userId)
-      Post.findOneAndUpdate({_id: id}, { $inc: {'likes.$.amount': choice }, function(err){
-        if (err) return res.status(500).send({
-          message: 'could not add to like count'
-        })
-        return res.send('succesfully like/disliked')
-      }})
-      const likeCheck = Post.find({'liked.likedBy': userId})
-      const dislikeCheck = Post.find({'liked.dislikedBy': userId})
-      console.log(likeCheck, dislikeCheck)
-      if (choice === 1) {
-        Post.findOneAndUpdate({_id: id}, { $push: {'likes.likedBy': userId } }, function(err){
-          if (err) return res.status(500).send({
-            message: 'could not add post to saved'
+      const likedBy = Post.findOne({
+        _id: id,
+        likes: userId
+      }).then(post => {
+        console.log(post)
+        //This should return the post or null
+        if (post == null) {
+          Post.findOneAndUpdate({
+            _id: id
+          }, {
+            $addToSet: {
+              likes: userId
+            }
+          }, function (err) {
+            if (err) {
+              return res.status(500).send({
+                message: 'could not add post to saved',
+                error: err
+              })
+            } else {
+              return res.status(200).send({
+                message: 'Liked post',
+                liked: true
+              })
+            }
           })
-          Post.update(
-            { _id: id },
-            { $pull: { 'likes': { 'dislikedBy': userId } } }
-          )
-          return res.send('succesfully added to likes')
-        })
-      }
-    }})
-  
+        } else {
+          Post.findOneAndUpdate({
+            _id: id
+          }, {
+            $pull: {
+              likes: userId
+            }
+          }, function (err) {
+            if (err) {
+              res.status(500).send({
+                message: 'and error occured',
+              })
+            } else {
+              res.status(200).send({
+                message: 'Post unliked.',
+                liked: false
+              })
+            }
+          })
+        }
+      })
+    }
+  })
 }

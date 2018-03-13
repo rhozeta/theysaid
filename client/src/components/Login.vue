@@ -1,26 +1,26 @@
 <template>
-<div>
-<div class='container'>
-  <div class='card'>
-    <div class='card-body'>
-      <h1>Login</h1>
-      <p>female/finance/nyc</p>
-      <div class='form-group'>
-        <div>
-        <h4>Email</h4>
-        <input type='text' name='email' class='form-control' v-model='email'>
+<div id="wrapper">
+  <div class='container'>
+    <div class='card panel'>
+      <div class='card-body'>
+        <h1>Login</h1>
+        <p>female/finance/nyc</p>
+        <div class='form-group'>
+          <div>
+            <h4>Email</h4>
+            <input type='text' name='email' class='form-control' v-model='email'>
+          </div>
+          <div>
+            <h4>Password</h4>
+            <input type='password' name='password' class='form-control' v-model='password'>
+          </div>
+          <div class='error' v-html='error' />
+          <button class='btn btn-success btn-lg' @click='loginUser'>Login</button>
         </div>
-        <div>
-        <h4>Password</h4>
-        <input type='password' name='password' class='form-control' v-model='password'>
-        </div>
-        <div class='error' v-html='error' />
-        <button class='btn btn-success btn-lg' @click='loginUser'>Login</button>
       </div>
     </div>
   </div>
-  </div>
-  </div>
+</div>
 </template>
 
 <script>
@@ -55,11 +55,13 @@ export default {
     }
   }
 }
+
 </script>
 
 <style>
-@import '../assets/css/main.css';
+@import '../assets/css/signup.css';
 .error {
   color: red;
 }
+
 </style>

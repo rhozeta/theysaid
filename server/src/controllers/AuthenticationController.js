@@ -2,7 +2,7 @@ const User = require('../../models/user')
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
 
-function jwtSignUser (user) {
+function jwtSignUser(user) {
   const ONE_WEEK = 60 * 60 * 24 * 7
   return jwt.sign(user, config.authentication.jwtSecret, {
     expiresIn: ONE_WEEK
@@ -35,13 +35,15 @@ module.exports = {
       }
     })
   },
-  async login (req, res) {
-    try{
-      const {email, password} = req.body
-      const user = await  User.findOne({
+  async login(req, res) {
+    try {
+      const {
+        email,
+        password
+      } = req.body
+      const user = await User.findOne({
         email: email
       })
-      
       if (!user) {
         return res.status(403).send({
           error: 'The login information was incorrect'
@@ -59,7 +61,6 @@ module.exports = {
           return res.status(401).send()
         }
       })
-      
     } catch (err) {
       res.status(500).send({
         error: 'An error has occured trying to login.'
