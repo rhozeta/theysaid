@@ -2,11 +2,9 @@
 <div>
   <!-- jumbotron -->
   <div id="landing">
-    <vue-particles color="#000000" id="particles-js">
-    </vue-particles>
-     <div id="cta">
+      <div id="cta">
       <h1>theysaid</h1>
-      <div>
+    <div>
         <p>FIND YOUR FORUM</p>
         <p id="tagline">See what the women in your field have to say.</p>
         <router-link to='/register'>
@@ -17,6 +15,7 @@
         </router-link>
       </div>
 </div>
+
   </div>
   <!-- services -->
   <div id="about">
@@ -51,9 +50,9 @@
             <b>Exclusive</b>
           </h3>
           <icon class="about-icon" name="stop-circle" scale="5"></icon>
-          <h4>
+          <h3>
             <b>No boys allowed.</b>
-          </h4>
+          </h3>
           <p>
             <i>And no party crashers.</i>
           </p>
@@ -66,7 +65,7 @@
   <div id="example">
     <div class="container">
       <div>
-        <h3 style="padding-bottom: 25px;">finance/female/nyc</h3>
+        <h4 style="padding-bottom: 25px;">finance/female/nyc</h4>
         <p>Membership in this forum is limited to women professionals from select Finance companies. This ensures threads
           and feedback are relevant to you.</p>
       </div>

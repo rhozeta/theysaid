@@ -15,7 +15,6 @@ Vue.use(PostsService)
 Vue.use(VueParticles)
 Vue.component('icon', Icon)
 Vue.use(require('vue-moment'))
-
 sync(store, router)
 Vue.config.productionTip = false
 

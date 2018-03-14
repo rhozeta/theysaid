@@ -1,7 +1,6 @@
 
 @import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
-@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
-
+@import '../../../node_modules/shards-ui/dist/css/shards.css';
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
@@ -43,7 +42,6 @@ height: 86vh;
 }
 }
 
-
 ::-webkit-scrollbar {
 display: none;
 }
@@ -74,6 +72,9 @@ display: none;
 float: right;
 margin: 5px;
 }
+.post-title {
+  overflow: hidden;
+}
 .comment-time {
 float: right;
 }
@@ -96,23 +97,37 @@ height: max-content;
 background-color: #2f4550;
 }
 .selected {
-color: #b8dbd9;
-background-color: #b8dbd9;
+  background-color: white;
+  color: black;
 }
-.sidebar-container {
-background-color: #2f4550;
-}
+
 .sidebar {
-color: white;
 overflow-y: scroll;
+color: black;
+background-color: white;
 }
 .sidebar-post-container {
-overflow-wrap: normal;
 height: max-content;
 width: 100%;
-margin: 2% 0;
-padding: 10%;
-color: black;
+
 }
-
-
+.sidebar-nav-item {
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+  margin-top: 1em;
+}
+.sidebar-nav {
+  background-color: #586f7c;
+}
+.sidebar-likes {
+  text-align: center;
+}
+.likes {
+  padding: 5%;
+  margin: 0 auto;
+}
+hr {
+  margin-top: .5em;
+  margin-bottom: .5em;
+}

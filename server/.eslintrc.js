@@ -4,13 +4,13 @@ module.exports = {
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "ecmaVersion": 6,
+        "parser": "babel-eslint",
+        "ecmaVersion": 8,
         "sourceType": "module",
         "ecmaFeatures": {
             jsx: false
         }
     },
-    "parser": "babel-eslint",
     "rules": {
         "no-unused-vars": "off",
         "no-undef": "off",

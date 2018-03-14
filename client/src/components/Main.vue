@@ -3,15 +3,26 @@
     <div class='row'>
       <!-- #### sidebar #### -->
       <div class='col-md-2 sidebar'>
-        <button class='btn btn-sm' data-toggle="popover" data-placement="bottom" data-content="hello" data-html="true">
-          Filters
-        </button>
+        <div class="sidebar-nav row">
+          <div class="col-xs-6 sidebar-nav-item">
+          <icon name="filter" scale="2"></icon>
+          <p>Filters</p>
+        </div>
+      <div class="col-xs-6 sidebar-nav-item">
+        <icon name="plus" scale="2"></icon>
+        <p>New Post</p>
+      </div>
+        </div>
         <div v-for="post in posts" :key='post._id'>
-          <div :id='post._id' class="sidebar-post-container card" @click='showPost(post._id)'>
+          <div :id='post._id' class="sidebar-post-container" @click='showPost(post._id)'>
             <b>{{ post.title }}</b>
-            <p v-if="post.likes">{{ post.likes.length }} likes</p>
+            <div class="row sidebar-likes">
+            <p v-if="post.likes" class="col-xs-6 likes">{{ post.likes.length }} <icon name="heart" scale="1"></icon></p>
+            <p v-if="post.comments" class="col-xs-6 likes">{{ post.comments.length }} <icon name="comments" scale="1"></icon></p>
+            </div>
             <p class='sidebar-timestamp'>{{ post.published | moment('LTS ddd, MMMM Do YYYY') }}</p>
           </div>
+          <hr>
         </div>
       </div>
       <!-- #### post display #### -->
@@ -25,23 +36,24 @@
               <div>
               <span class='heart' v-if="selectedPost.likes">{{ selectedPost.likes.length }} likes </span>
               </div>
-              <h1>{{ selectedPost.title }}</h1>
+              <h1 class='post-title'>{{ selectedPost.title }}</h1>
               <p>{{ selectedPost.body }}</p>
               <div class="comment-display">
-                <div class="card new-comment form-group">
+                <div class="new-comment form-group">
                   <textarea class="form-control" rows="5" cols="15" placeholder="Comment" v-model="commentBody"></textarea>
                   <div class='message' v-text='message'></div>
                   <button class="form-control btn btn-success" @click='addComment(selectedPost._id)'>SUBMIT COMMENT</button>
                 </div>
                 <!-- #### render comments #### -->
                 <div v-for="(comment, index) in selectedPost.comments" :key='index' class='comment-box'>
-                  <div :id=index class='card comment' @click='hideComment(index)'>
-                    <div class="card-body">
+                  <div :id=index class='comment' @click='hideComment(index)'>
+                    <div class="comment-body">
                       <p>{{ selectedPost.comments[index] }}</p>
                       <p class='comment-time'>
                         <i>{{ index }} time</i>
                       </p>
                     </div>
+                    <hr>
                   </div>
                 </div>
               </div>
